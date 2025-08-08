@@ -2,8 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using LoopFinder;
-using LoopFinder.Lib; 
+using LoopFinder.Lib;
 
 namespace LoopFinder.WinForms
 {

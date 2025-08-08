@@ -3,9 +3,6 @@ using NAudio.Wave;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-//using LoopFinder;            // your lib namespace
-using LoopFinder.Lib;        // if your lib is under this
-// Make sure your library namespace is correct
 
 namespace LoopFinder.WinForms
 {
