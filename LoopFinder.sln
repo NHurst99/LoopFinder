@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopFinder.WinForms", "LoopFinder\LoopFinder.WinForms.csproj", "{93608C50-72C0-4D66-AF55-BCCC20636471}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2} = {0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopFinder.Lib", "LoopFinder.Lib\LoopFinder.Lib.csproj", "{0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93608C50-72C0-4D66-AF55-BCCC20636471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93608C50-72C0-4D66-AF55-BCCC20636471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93608C50-72C0-4D66-AF55-BCCC20636471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93608C50-72C0-4D66-AF55-BCCC20636471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC9FE3C-C5E2-4BBA-8871-CAC18B5A68D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17A73D47-D4C0-436E-A142-5707F29C3857}
+	EndGlobalSection
+EndGlobal
