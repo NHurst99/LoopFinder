@@ -1,4 +1,3 @@
-﻿using LoopFinder.Lib;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using NWaves.FeatureExtractors;
@@ -39,10 +38,9 @@ namespace LoopFinder.Lib
             int mfccCount = 20,
             double minSegSec = 6.0,
             double minSimilarity = 0.85,
-            bool preferSecondHalf = true,
             double tailGuardSec = 1.0)
             => FindLoopPointsWithDebug(path, targetSampleRate, frameSize, hopSize, mfccCount,
-                                       minSegSec, minSimilarity, preferSecondHalf, tailGuardSec).Points;
+                                       minSegSec, minSimilarity, tailGuardSec).Points;
 
         // New debug-friendly API
         public static (LoopPoints Points, DebugInfo Debug) FindLoopPointsWithDebug(
@@ -53,7 +51,6 @@ namespace LoopFinder.Lib
             int mfccCount = 20,
             double minSegSec = 6.0,
             double minSimilarity = 0.85,
-            bool preferSecondHalf = true,
             double tailGuardSec = 1.0,
             int waveformBins = 2000)
         {
@@ -151,32 +148,20 @@ namespace LoopFinder.Lib
             {
                 // Fallback global (no spans collection here to keep it reasonable)
                 strategy = "global";
-                var Sfull = new double[T, T];
-                for (int i = 0; i < T; i++)
-                {
-                    for (int j = i + 1; j < T; j++)
-                    {
-                        var s = CosSim(i, j);
-                        // mask out near-diagonal within minSeg
-                        if (Math.Abs(j - i) < minSegFrames) s = double.NegativeInfinity;
-                        Sfull[i, j] = s;
-                    }
-                }
-
                 int Lglob = 0, ig = 0, jg = 0;
-                for (int k = 1; k < T; k++)
+                double thr = minSimilarity - 0.1;
+                for (int k = minSegFrames; k < T; k++)
                 {
-                    int len = Math.Min(T - 0, T - k);
                     int run = 0;
-                    for (int s = 0; s < len; s++)
+                    for (int s = 0; s < T - k; s++)
                     {
-                        bool ok = Sfull[s, s + k] >= (minSimilarity - 0.1);
+                        bool ok = CosSim(s, s + k) >= thr;
                         if (ok)
                         {
                             run++;
                             if (run > Lglob)
                             {
-                                Lglob = run; ig = s - run + 1; jg = s - run + 1 + k;
+                                Lglob = run; ig = s - run + 1; jg = ig + k;
                             }
                         }
                         else run = 0;
@@ -185,7 +170,7 @@ namespace LoopFinder.Lib
                 if (Lglob < minSegFrames)
                     throw new Exception("No sufficiently long repeated segment found. Try lowering minSimilarity or minSegSec.");
 
-                Lbest = Lglob; iBest = ig; jBest = jg; usedSim = minSimilarity - 0.1;
+                Lbest = Lglob; iBest = ig; jBest = jg; usedSim = thr;
             }
 
             int iStart = iBest;
